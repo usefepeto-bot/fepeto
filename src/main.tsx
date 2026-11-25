@@ -70,7 +70,7 @@ function App(){
   const join=async(e:React.FormEvent)=>{e.preventDefault();setError('');const {error}=await supabase.from('waitlist').insert({drop_id:drop?.id||null,name:form.name,email:form.email||null,whatsapp:form.whatsapp,source:'site',consent:true});if(error){setError(error.code==='23505'?'Você já está no ACCESS deste lançamento.':error.message);return}setSent(true)};
 
   return <main className="site">
-    <header><div className="logo">FEPETO</div><nav><a href="#loja">LOJA</a><a href="#access">ACCESS</a><button className="cartBtn" onClick={()=>setCartOpen(true)}>CARRINHO ({cart.reduce((n,i)=>n+i.qty,0)})</button></nav></header>
+    <header><div className="logo">FEPETO</div><nav>{isLive&&<a href="#loja">LOJA</a>}<a href="#access">ACCESS</a>{isLive&&<button className="cartBtn" onClick={()=>setCartOpen(true)}>CARRINHO ({cart.reduce((n,i)=>n+i.qty,0)})</button>}</nav></header>
 
     <section className="hero"><p className="eyebrow">VISTA ATITUDE, VISTA FEPETO.</p><h1>IDENTIDADE<br/>QUE SE<br/>SUSTENTA.</h1><p className="lead">Feito de vivência. Feito para quem faz parte.</p>{isLive ? <div className="actions"><a href="#loja">VER PRODUTOS</a><a href="#manifesto">MANIFESTO</a></div> : <div className="actions"><a href="#access">ENTRAR NO ACCESS</a></div>}</section>
 
